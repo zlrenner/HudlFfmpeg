@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using Hudl.FFmpeg.Command;
 using Hudl.FFmpeg.Enums;
 using Hudl.FFmpeg.Extensions;
 using Hudl.FFmpeg.Resources.Interfaces;
+using Hudl.FFmpeg.Settings;
 
 namespace Hudl.FFmpeg.Common
 {

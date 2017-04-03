@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 
 namespace Hudl.FFmpeg.Extensions
 {
@@ -14,7 +15,7 @@ namespace Hudl.FFmpeg.Extensions
             var typeCode  = Type.GetTypeCode(type);
 
             return (typeCode == TypeCode.Decimal ||
-                    (type.IsPrimitive && typeCode != TypeCode.Object && typeCode != TypeCode.Boolean &&
+                    (type.GetTypeInfo().IsPrimitive && typeCode != TypeCode.Object && typeCode != TypeCode.Boolean &&
                      typeCode != TypeCode.Char));
 
         }

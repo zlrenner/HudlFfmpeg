@@ -163,7 +163,7 @@ namespace Hudl.FFmpeg.Command
                     RedirectStandardError = true,
                 };
 
-                Log.Debug($"ffmpeg.exe MonoRuntime={ResourceManagement.IsMonoRuntime()} Args={ffmpegProcess.StartInfo.Arguments}");
+                Log.Debug($"ffmpeg.exe Args={ffmpegProcess.StartInfo.Arguments}");
 
                 var stdErrorReader = StandardErrorAsyncStreamReader.AttachReader(ffmpegProcess); 
 
@@ -187,7 +187,7 @@ namespace Hudl.FFmpeg.Command
 
                 StdOut = stdErrorReader.ToString(); 
 
-                Log.Debug($"ffmpeg.exe MonoRuntime={ResourceManagement.IsMonoRuntime()}  Output={StdOut}.");
+                Log.Debug($"ffmpeg.exe  Output={StdOut}.");
 
                 var exitCode = ffmpegProcess.ExitCode;
                 if (exitCode != 0)
@@ -227,7 +227,7 @@ namespace Hudl.FFmpeg.Command
 
         private static bool IsSignal15Error(string errorOutput)
         {
-            var errorIndex = errorOutput.IndexOf(ErrorSignal15Terminating, StringComparison.InvariantCulture);
+            var errorIndex = errorOutput.IndexOf(ErrorSignal15Terminating, StringComparison.Ordinal);
             return errorIndex > -1; 
         }
 

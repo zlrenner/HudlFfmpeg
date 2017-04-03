@@ -18,17 +18,17 @@ namespace Hudl.FFprobe.Serialization.Converters
         public BaseStreamMetadata Create(Type objectType, JObject jsonObject)
         {
             var codecType = (string)jsonObject.Property("codec_type");
-            if (string.Equals(codecType, CodecTypes.Video.ToString(), StringComparison.InvariantCultureIgnoreCase))
+            if (string.Equals(codecType, CodecTypes.Video.ToString(), StringComparison.OrdinalIgnoreCase))
             {
                 return new VideoStreamMetadata();
             }
              
-            if (string.Equals(codecType, CodecTypes.Audio.ToString(), StringComparison.InvariantCultureIgnoreCase))
+            if (string.Equals(codecType, CodecTypes.Audio.ToString(), StringComparison.OrdinalIgnoreCase))
             {
                 return new AudioStreamMetadata();
             }
 
-            if (string.Equals(codecType, CodecTypes.Data.ToString(), StringComparison.InvariantCultureIgnoreCase))
+            if (string.Equals(codecType, CodecTypes.Data.ToString(), StringComparison.OrdinalIgnoreCase))
             {
                 return new DataStreamMetadata();
             }

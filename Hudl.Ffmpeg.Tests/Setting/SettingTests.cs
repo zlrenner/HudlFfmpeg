@@ -16,7 +16,7 @@ namespace Hudl.FFmpeg.Tests.Setting
         {
             var setting = new CopyTimestamps();
 
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-copyts");
         }
 
@@ -27,8 +27,8 @@ namespace Hudl.FFmpeg.Tests.Setting
             var setting1 = new FrameDropThreshold() { Threshold = 0 };
             var setting2 = new FrameDropThreshold(0);
 
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting1));
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting2));
+            SettingSerializer.Serialize(setting1);
+            SettingSerializer.Serialize(setting2);
             Assert.Equal(SettingSerializer.Serialize(setting1), "-frame_drop_threshold 0");
             Assert.Equal(SettingSerializer.Serialize(setting2), "-frame_drop_threshold 0");
         }
@@ -40,7 +40,7 @@ namespace Hudl.FFmpeg.Tests.Setting
 
             Assert.Throws<ArgumentException>(() => new QualityScaleAudio(0));
             Assert.Throws<ArgumentException>(() => new QualityScaleAudio(32));
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-q:v 1");
         }
 
@@ -49,7 +49,7 @@ namespace Hudl.FFmpeg.Tests.Setting
         {
             var setting = new QualityScaleAudio(1);
 
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-q:a 1");
         }
 
@@ -58,7 +58,7 @@ namespace Hudl.FFmpeg.Tests.Setting
         {
             var setting = new AspectRatio(Ratio.Create(1, 1));
 
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-aspect 1:1");
         }
 
@@ -71,7 +71,7 @@ namespace Hudl.FFmpeg.Tests.Setting
 
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong1); });
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong2); });
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-movflags +faststart");
         }
 
@@ -84,7 +84,7 @@ namespace Hudl.FFmpeg.Tests.Setting
 
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong1); });
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong2); });
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-map [output1]");
         }
 
@@ -93,7 +93,7 @@ namespace Hudl.FFmpeg.Tests.Setting
         {
             var setting = new AutoConvert();
 
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-auto_convert 1");
         }
 
@@ -104,7 +104,7 @@ namespace Hudl.FFmpeg.Tests.Setting
             var setting = new BitRateAudio(1100);
 
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong1); });
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-b:a 1100k");
         }
 
@@ -115,7 +115,7 @@ namespace Hudl.FFmpeg.Tests.Setting
             var setting = new BitRateTolerance(1100);
 
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong1); });
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-bt 1100k");
         }
 
@@ -126,7 +126,7 @@ namespace Hudl.FFmpeg.Tests.Setting
             var setting = new BitRateVideo(1100);
 
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong1); });
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-b:v 1100k");
         }
 
@@ -139,7 +139,7 @@ namespace Hudl.FFmpeg.Tests.Setting
 
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong1); });
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong2); });
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-ac 1");
         }
 
@@ -152,7 +152,7 @@ namespace Hudl.FFmpeg.Tests.Setting
 
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong1); });
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong2); });
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-c:a libfdk_aac");
         }
 
@@ -165,7 +165,7 @@ namespace Hudl.FFmpeg.Tests.Setting
 
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong1); });
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong2); });
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-c:v libx264");
         }
 
@@ -178,16 +178,16 @@ namespace Hudl.FFmpeg.Tests.Setting
 
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong1); });
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong2); });
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-crf 18");
         }
 
         [Fact]
         public void Size_Verify()
         {
-            var setting = new Size(852, 480);
+            var setting = new Settings.Size(852, 480);
 
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-s 852x480");
         }
 
@@ -198,7 +198,7 @@ namespace Hudl.FFmpeg.Tests.Setting
             var setting = new DurationInput(2);
 
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong1); });
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-t 00:00:02.0");
         }
 
@@ -211,7 +211,7 @@ namespace Hudl.FFmpeg.Tests.Setting
 
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong1); });
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong2); });
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-f mp4");
         }
 
@@ -224,7 +224,7 @@ namespace Hudl.FFmpeg.Tests.Setting
 
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong1); });
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong2); });
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-f mp4");
         }
 
@@ -235,7 +235,7 @@ namespace Hudl.FFmpeg.Tests.Setting
             var setting = new FrameRate(29.97);
 
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong1); });
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-r 29.97");
         }
 
@@ -244,7 +244,7 @@ namespace Hudl.FFmpeg.Tests.Setting
         {
             var setting = new Input(Resource.From("c:\\apple.mp4"));
 
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-i \"c:/apple.mp4\"");
         }
 
@@ -255,7 +255,7 @@ namespace Hudl.FFmpeg.Tests.Setting
             var setting = new Level(3.1);
 
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong1); });
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-level 3.1");
         }
 
@@ -264,7 +264,7 @@ namespace Hudl.FFmpeg.Tests.Setting
         {
             var setting = new OverwriteOutput();
 
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-y");
         }
 
@@ -277,7 +277,7 @@ namespace Hudl.FFmpeg.Tests.Setting
 
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong1); });
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong2); });
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-pix_fmt yuv420p");
         }
 
@@ -290,7 +290,7 @@ namespace Hudl.FFmpeg.Tests.Setting
 
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong1); });
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong2); });
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-profile:v baseline");
         }
 
@@ -299,7 +299,7 @@ namespace Hudl.FFmpeg.Tests.Setting
         {
             var setting = new RemoveAudio();
 
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-an");
         }
 
@@ -311,16 +311,16 @@ namespace Hudl.FFmpeg.Tests.Setting
             var setting3 = new AvoidNegativeTimestamps(AvoidNegativeTimestampsType.MakeNonNegative);
             var setting4 = new AvoidNegativeTimestamps(AvoidNegativeTimestampsType.MakeZero);
 
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting1));
+            SettingSerializer.Serialize(setting1);
             Assert.Equal(SettingSerializer.Serialize(setting1), "-avoid_negative_ts auto");
 
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting2));
+            SettingSerializer.Serialize(setting2);
             Assert.Equal(SettingSerializer.Serialize(setting2), "-avoid_negative_ts disabled");
 
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting3));
+            SettingSerializer.Serialize(setting3);
             Assert.Equal(SettingSerializer.Serialize(setting3), "-avoid_negative_ts make_non_negative");
 
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting4));
+            SettingSerializer.Serialize(setting4);
             Assert.Equal(SettingSerializer.Serialize(setting4), "-avoid_negative_ts make_zero");
         }
 
@@ -333,7 +333,7 @@ namespace Hudl.FFmpeg.Tests.Setting
 
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong1); });
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong2); });
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-ss 00:02:00.0");
         }
 
@@ -346,7 +346,7 @@ namespace Hudl.FFmpeg.Tests.Setting
 
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong1); });
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong2); });
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-ss 00:02:00.0");
         }
 
@@ -355,7 +355,7 @@ namespace Hudl.FFmpeg.Tests.Setting
         {
             var setting = new TrimShortest();
 
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-shortest");
         }
 
@@ -366,7 +366,7 @@ namespace Hudl.FFmpeg.Tests.Setting
             var setting = new BitStreamFilterAudio("aac_adtstoasc");
 
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong1); });
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-bsf:a aac_adtstoasc");
         }
 
@@ -377,7 +377,7 @@ namespace Hudl.FFmpeg.Tests.Setting
             var setting = new BitStreamFilterVideo("aac_adtstoasc");
 
             Assert.Throws<InvalidOperationException>(() => { SettingSerializer.Serialize(settingWrong1); });
-            Assert.DoesNotThrow(() => SettingSerializer.Serialize(setting));
+            SettingSerializer.Serialize(setting);
             Assert.Equal(SettingSerializer.Serialize(setting), "-bsf:v aac_adtstoasc");
         }
     }

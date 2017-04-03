@@ -18,12 +18,12 @@ namespace Hudl.FFprobe.Serialization.Converters
         public BaseFrameMetadata Create(Type objectType, JObject jsonObject)
         {
             var codecType = (string)jsonObject.Property("media_type");
-            if (string.Equals(codecType, CodecTypes.Video.ToString(), StringComparison.InvariantCultureIgnoreCase))
+            if (string.Equals(codecType, CodecTypes.Video.ToString(), StringComparison.OrdinalIgnoreCase))
             {
                 return new VideoFrameMetadata();
             }
              
-            if (string.Equals(codecType, CodecTypes.Audio.ToString(), StringComparison.InvariantCultureIgnoreCase))
+            if (string.Equals(codecType, CodecTypes.Audio.ToString(), StringComparison.OrdinalIgnoreCase))
             {
                 return new AudioFrameMetadata();
             }

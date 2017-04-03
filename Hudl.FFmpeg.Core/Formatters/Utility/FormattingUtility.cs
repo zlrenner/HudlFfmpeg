@@ -3,6 +3,7 @@ using System.Globalization;
 using Hudl.FFmpeg.Resources.Interfaces;
 using Hudl.FFmpeg.Attributes;
 using System.Linq;
+using System.Reflection;
 
 namespace Hudl.FFmpeg.Formatters.Utility
 {
@@ -37,7 +38,7 @@ namespace Hudl.FFmpeg.Formatters.Utility
         }
         public static string Map(string map, bool forSettings = false)
         {
-            return forSettings && map.IndexOf(":", StringComparison.InvariantCulture) > -1
+            return forSettings && map.IndexOf(":", StringComparison.Ordinal) > -1
                        ? map
                        : string.Format("[{0}]", map);
         }

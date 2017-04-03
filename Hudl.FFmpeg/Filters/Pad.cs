@@ -1,5 +1,5 @@
-﻿using System.Drawing;
-using Hudl.FFmpeg.Attributes;
+﻿using Hudl.FFmpeg.Attributes;
+using Hudl.FFmpeg.DataTypes;
 using Hudl.FFmpeg.Enums;
 using Hudl.FFmpeg.Filters.Interfaces;
 using Hudl.FFmpeg.Resources.BaseTypes;

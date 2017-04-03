@@ -18,7 +18,6 @@ namespace Hudl.FFmpeg.Command.StreamReaders
             _stopSignal = new ManualResetEvent(false);
         }
 
-        protected Thread MonitoringThread;
         protected StringBuilder OutputBuilder;
         protected readonly Process ProcessToListenTo;
         protected volatile bool _stopped;
@@ -28,38 +27,14 @@ namespace Hudl.FFmpeg.Command.StreamReaders
 
         public void Listen()
         {
-            //workaround for a bug in the mono process when attempting to read async from console output events
-            // - link http://mono.1490590.n4.nabble.com/System-Diagnostic-Process-and-event-handlers-td3246096.html
-            if (ResourceManagement.IsMonoRuntime())
-            {
-                ListenAsThread();
-            }
-            else
-            {
-                ListenAsAsync();
-            }
+            ListenAsAsync();
         }
         protected abstract void ListenAsAsync();
-        protected abstract void ListenAsThread();
 
         public void Stop()
         {
             _stopped = true;
             _stopSignal.WaitOne(1000);
-            if (ResourceManagement.IsMonoRuntime())
-            {
-                try
-                {
-                    if (MonitoringThread.ThreadState != System.Threading.ThreadState.Stopped)
-                    {
-                        MonitoringThread.Abort();
-                    }
-                }
-                catch (Exception e)
-                {
-                    Log.Error("Unable to abort the monitoring thread", e);
-                }
-            }
         }
 
         private void HandleDataReceived(string data)
@@ -84,10 +59,6 @@ namespace Hudl.FFmpeg.Command.StreamReaders
         protected void HandleDataReceivedAsAsync(object sender, DataReceivedEventArgs dataReceivedEventArgs)
         {
             HandleDataReceived(dataReceivedEventArgs.Data);
-        }
-        protected void HandleDataReceivedAsThread(string data)
-        {
-            HandleDataReceived(data);
         }
        
         public override string ToString()

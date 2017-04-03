@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Collections.Generic;
+using System.Reflection;
 using Hudl.FFmpeg.Attributes;
 using Hudl.FFmpeg.Common;
 using Hudl.FFmpeg.Enums;

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.Loader;
 using Hudl.FFmpeg.Common;
 using Hudl.FFmpeg.Enums;
 using Hudl.FFmpeg.Resources.BaseTypes;
@@ -104,7 +107,15 @@ namespace Hudl.FFmpeg.Resources
         private static List<Type> GetTypes<T>()
         {
             // this only works if the assemblies are loaded already :-(
-            return AppDomain.CurrentDomain.GetAssemblies().ToList()
+            List<Assembly> assemblies = new List<Assembly>();
+            foreach (ProcessModule module in Process.GetCurrentProcess().Modules)
+            {
+                var assemblyName = AssemblyLoadContext.GetAssemblyName(module.FileName);
+                var assembly = Assembly.Load(assemblyName);
+                assemblies.Add(assembly);
+            }
+
+            return assemblies
                 .SelectMany(a =>
                     {
                         try
@@ -117,7 +128,7 @@ namespace Hudl.FFmpeg.Resources
                             return new Type[0];
                         }
                     })
-                .Where(t => !t.IsAbstract && typeof(T).IsAssignableFrom(t) && t.GetConstructor(Type.EmptyTypes) != null).ToList();
+                .Where(t => !t.GetTypeInfo().IsAbstract && typeof(T).IsAssignableFrom(t) && t.GetConstructor(Type.EmptyTypes) != null).ToList();
         }
     }
 }

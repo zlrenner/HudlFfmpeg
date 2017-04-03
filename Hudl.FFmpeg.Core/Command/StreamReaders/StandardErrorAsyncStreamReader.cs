@@ -9,10 +9,7 @@ namespace Hudl.FFmpeg.Command.StreamReaders
             : base(processToListenTo)
         {
             ProcessToListenTo.StartInfo.RedirectStandardError = true;
-            if (!ResourceManagement.IsMonoRuntime())
-            {
-                ProcessToListenTo.ErrorDataReceived += HandleDataReceivedAsAsync;
-            }
+            ProcessToListenTo.ErrorDataReceived += HandleDataReceivedAsAsync;
         }
 
         public static StandardErrorAsyncStreamReader AttachReader(Process processToListenTo)
@@ -24,31 +21,5 @@ namespace Hudl.FFmpeg.Command.StreamReaders
         {
             ProcessToListenTo.BeginErrorReadLine();
         }
-
-        protected override void ListenAsThread()
-        {
-            MonitoringThread = new Thread(AsyncStdErrorMonitor);
-            MonitoringThread.Start();
-        }
-
-        private void AsyncStdErrorMonitor()
-        {
-            try
-            {
-                do
-                {
-                    string line = ProcessToListenTo.StandardError.ReadLine();
-                    if (line != null)
-                    {
-                        HandleDataReceivedAsThread(line);
-                    }
-                }
-                while (!_stopped && !ProcessToListenTo.HasExited);
-                _stopSignal.Set();
-            }
-            catch
-            { }
-        }
     }
-
 }

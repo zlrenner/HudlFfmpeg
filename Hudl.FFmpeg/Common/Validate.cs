@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using Hudl.FFmpeg.Attributes;
 using Hudl.FFmpeg.Enums;
 using Hudl.FFmpeg.Settings.Interfaces;

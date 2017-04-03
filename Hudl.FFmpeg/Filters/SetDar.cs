@@ -7,7 +7,6 @@ using Hudl.FFmpeg.Filters.BaseTypes;
 using Hudl.FFmpeg.Filters.Interfaces;
 using Hudl.FFmpeg.Formatters;
 using Hudl.FFmpeg.Resources.BaseTypes;
-using Microsoft.SqlServer.Server;
 
 namespace Hudl.FFmpeg.Filters
 {

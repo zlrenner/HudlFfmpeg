@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+﻿using Hudl.FFmpeg.DataTypes;
 using Hudl.FFmpeg.Interfaces;
 
 namespace Hudl.FFmpeg.Formatters
@@ -7,7 +7,7 @@ namespace Hudl.FFmpeg.Formatters
     {
         public string Format(object value)
         {
-            var sizeValue = (Size) value;
+            var sizeValue = (Size)value;
             return string.Format("{0}x{1}", sizeValue.Width, sizeValue.Height);
         }
     }

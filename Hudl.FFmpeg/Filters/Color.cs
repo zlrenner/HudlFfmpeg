@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using Hudl.FFmpeg.Attributes;
 using Hudl.FFmpeg.DataTypes;
 using Hudl.FFmpeg.Filters.Attributes;
